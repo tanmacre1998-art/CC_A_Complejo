@@ -1,0 +1,67 @@
+[
+  {
+    "op": "suma (QFT)",
+    "a": 320,
+    "b": 150,
+    "valor": 470,
+    "esperado": 470,
+    "p_correcto": 1.0,
+    "qubits": 19,
+    "profundidad": 187,
+    "cx": 288,
+    "compuertas_1q": 474,
+    "compuertas_total": 762
+  },
+  {
+    "op": "suma (ripple-carry)",
+    "a": 320,
+    "b": 150,
+    "valor": 470,
+    "esperado": 470,
+    "p_correcto": 1.0,
+    "qubits": 20,
+    "profundidad": 263,
+    "cx": 145,
+    "compuertas_1q": 216,
+    "compuertas_total": 361
+  },
+  {
+    "op": "multiplicación (QFT)",
+    "a": 53,
+    "b": 4,
+    "valor": 212,
+    "esperado": 212,
+    "p_correcto": 1.0,
+    "qubits": 18,
+    "profundidad": 1273,
+    "cx": 738,
+    "compuertas_1q": 947,
+    "compuertas_total": 1685
+  },
+  {
+    "op": "multiplicación (QFT)",
+    "a": 15,
+    "b": 15,
+    "valor": 225,
+    "esperado": 225,
+    "p_correcto": 1.0,
+    "qubits": 16,
+    "profundidad": 1038,
+    "cx": 592,
+    "compuertas_1q": 762,
+    "compuertas_total": 1354
+  },
+  {
+    "op": "multiplicación (QFT)",
+    "a": 123,
+    "b": 45,
+    "valor": 5535,
+    "esperado": 5535,
+    "p_correcto": 1.0,
+    "qubits": 26,
+    "profundidad": 3866,
+    "cx": 2202,
+    "compuertas_1q": 2727,
+    "compuertas_total": 4929
+  }
+]

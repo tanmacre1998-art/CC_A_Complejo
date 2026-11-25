@@ -1,0 +1,42 @@
+[
+  {
+    "a": 0,
+    "a_mas_b": 5,
+    "cuentas": 484
+  },
+  {
+    "a": 1,
+    "a_mas_b": 6,
+    "cuentas": 499
+  },
+  {
+    "a": 2,
+    "a_mas_b": 7,
+    "cuentas": 528
+  },
+  {
+    "a": 3,
+    "a_mas_b": 8,
+    "cuentas": 512
+  },
+  {
+    "a": 4,
+    "a_mas_b": 9,
+    "cuentas": 488
+  },
+  {
+    "a": 5,
+    "a_mas_b": 10,
+    "cuentas": 488
+  },
+  {
+    "a": 6,
+    "a_mas_b": 11,
+    "cuentas": 493
+  },
+  {
+    "a": 7,
+    "a_mas_b": 12,
+    "cuentas": 508
+  }
+]

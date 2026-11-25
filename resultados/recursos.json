@@ -1,0 +1,216 @@
+{
+  "Draper (QFT)": [
+    {
+      "n": 1,
+      "qubits": 3,
+      "profundidad": 27,
+      "cx": 8,
+      "compuertas_1q": 22,
+      "compuertas_total": 30
+    },
+    {
+      "n": 2,
+      "qubits": 5,
+      "profundidad": 47,
+      "cx": 22,
+      "compuertas_1q": 47,
+      "compuertas_total": 69
+    },
+    {
+      "n": 3,
+      "qubits": 7,
+      "profundidad": 67,
+      "cx": 42,
+      "compuertas_1q": 81,
+      "compuertas_total": 123
+    },
+    {
+      "n": 4,
+      "qubits": 9,
+      "profundidad": 87,
+      "cx": 68,
+      "compuertas_1q": 124,
+      "compuertas_total": 192
+    },
+    {
+      "n": 5,
+      "qubits": 11,
+      "profundidad": 107,
+      "cx": 100,
+      "compuertas_1q": 176,
+      "compuertas_total": 276
+    },
+    {
+      "n": 6,
+      "qubits": 13,
+      "profundidad": 127,
+      "cx": 138,
+      "compuertas_1q": 237,
+      "compuertas_total": 375
+    },
+    {
+      "n": 7,
+      "qubits": 15,
+      "profundidad": 147,
+      "cx": 182,
+      "compuertas_1q": 307,
+      "compuertas_total": 489
+    },
+    {
+      "n": 8,
+      "qubits": 17,
+      "profundidad": 167,
+      "cx": 232,
+      "compuertas_1q": 386,
+      "compuertas_total": 618
+    },
+    {
+      "n": 9,
+      "qubits": 19,
+      "profundidad": 187,
+      "cx": 288,
+      "compuertas_1q": 474,
+      "compuertas_total": 762
+    },
+    {
+      "n": 10,
+      "qubits": 21,
+      "profundidad": 207,
+      "cx": 350,
+      "compuertas_1q": 571,
+      "compuertas_total": 921
+    }
+  ],
+  "Cuccaro (ripple-carry)": [
+    {
+      "n": 1,
+      "qubits": 4,
+      "profundidad": 31,
+      "cx": 17,
+      "compuertas_1q": 24,
+      "compuertas_total": 41
+    },
+    {
+      "n": 2,
+      "qubits": 6,
+      "profundidad": 60,
+      "cx": 33,
+      "compuertas_1q": 48,
+      "compuertas_total": 81
+    },
+    {
+      "n": 3,
+      "qubits": 8,
+      "profundidad": 89,
+      "cx": 49,
+      "compuertas_1q": 72,
+      "compuertas_total": 121
+    },
+    {
+      "n": 4,
+      "qubits": 10,
+      "profundidad": 118,
+      "cx": 65,
+      "compuertas_1q": 96,
+      "compuertas_total": 161
+    },
+    {
+      "n": 5,
+      "qubits": 12,
+      "profundidad": 147,
+      "cx": 81,
+      "compuertas_1q": 120,
+      "compuertas_total": 201
+    },
+    {
+      "n": 6,
+      "qubits": 14,
+      "profundidad": 176,
+      "cx": 97,
+      "compuertas_1q": 144,
+      "compuertas_total": 241
+    },
+    {
+      "n": 7,
+      "qubits": 16,
+      "profundidad": 205,
+      "cx": 113,
+      "compuertas_1q": 168,
+      "compuertas_total": 281
+    },
+    {
+      "n": 8,
+      "qubits": 18,
+      "profundidad": 234,
+      "cx": 129,
+      "compuertas_1q": 192,
+      "compuertas_total": 321
+    },
+    {
+      "n": 9,
+      "qubits": 20,
+      "profundidad": 263,
+      "cx": 145,
+      "compuertas_1q": 216,
+      "compuertas_total": 361
+    },
+    {
+      "n": 10,
+      "qubits": 22,
+      "profundidad": 292,
+      "cx": 161,
+      "compuertas_1q": 240,
+      "compuertas_total": 401
+    }
+  ],
+  "Multiplicador QFT": [
+    {
+      "n": 1,
+      "qubits": 4,
+      "profundidad": 42,
+      "cx": 16,
+      "compuertas_1q": 30,
+      "compuertas_total": 46
+    },
+    {
+      "n": 2,
+      "qubits": 8,
+      "profundidad": 188,
+      "cx": 96,
+      "compuertas_1q": 138,
+      "compuertas_total": 234
+    },
+    {
+      "n": 3,
+      "qubits": 12,
+      "profundidad": 496,
+      "cx": 276,
+      "compuertas_1q": 368,
+      "compuertas_total": 644
+    },
+    {
+      "n": 4,
+      "qubits": 16,
+      "profundidad": 1038,
+      "cx": 592,
+      "compuertas_1q": 762,
+      "compuertas_total": 1354
+    },
+    {
+      "n": 5,
+      "qubits": 20,
+      "profundidad": 1886,
+      "cx": 1080,
+      "compuertas_1q": 1362,
+      "compuertas_total": 2442
+    },
+    {
+      "n": 6,
+      "qubits": 24,
+      "profundidad": 3112,
+      "cx": 1776,
+      "compuertas_1q": 2210,
+      "compuertas_total": 3986
+    }
+  ]
+}
