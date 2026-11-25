@@ -338,14 +338,137 @@ del 18 % con números de 3 bits). Mientras más compuertas, más se acumula el e
 """)
 
 md(r"""
-## 10. Conclusiones
+## 10. Correrlo aquí vs. en un computador cuántico real
+
+Todo lo anterior corrió en un **simulador**: un programa en un computador normal que hace las cuentas que haría un
+computador cuántico. Al final mandamos el mismo circuito, **5 + 3 con el sumador de Cuccaro**
+(`qasm/suma_5mas3_cuccaro.qasm`), a un computador cuántico de verdad: **ibm_kingston**, de IBM, con 156 qubits.
+En esta sección comparamos las dos cosas.
+
+| | En nuestro computador (PowerShell / Colab) | En ibm_kingston (IBM) |
+|---|---|---|
+| **Qué es** | Un simulador (`AerSimulator`) que corre en la CPU | Un chip superconductor real, enfriado casi al cero absoluto |
+| **Cómo "guarda" los qubits** | Un vector de $2^n$ números complejos en la RAM | Qubits físicos de verdad |
+| **Compuertas** | Las que escribimos (X, CNOT, Toffoli…) | Solo las nativas del chip: $\sqrt{X}$, $R_Z$, $X$ y CZ |
+| **Conexiones** | Cualquier qubit con cualquiera | Cada qubit solo se conecta con sus vecinos |
+| **Errores** | Ninguno (a menos que simulemos ruido) | Cada compuerta y cada medición se pueden equivocar |
+| **Tiempo** | Instantáneo | Fila + ejecución (a nosotros nos tomó unos segundos) |
+| **Resultado de 5 + 3** | 8 el 100 % de las veces | 8 el 74,8 % de las veces |
+
+### ¿Qué pasa en cada caso?
+
+**En PowerShell o Colab:**
+1. Qiskit arma el circuito.
+2. El simulador multiplica el vector de estado por la matriz de cada compuerta.
+3. Al final calcula las probabilidades $|amplitud|^2$ y "lanza los dados" 1024 veces.
+
+**En IBM:**
+1. El circuito se envía por internet (como OpenQASM) a la nube de IBM.
+2. IBM lo **traduce** (*transpila*) a las compuertas nativas del chip y escoge qué qubits físicos usar.
+3. El trabajo espera en la fila.
+4. El chip ejecuta el circuito con pulsos de microondas y mide los qubits. Esto se repite 1024 veces.
+5. Los resultados vuelven y aparecen en *Workloads*.
+
+Es el mismo circuito; lo que cambia es **dónde** y **cómo** se ejecuta.
+""")
+code(r"""
+from qiskit import qasm2
+circuito = qasm2.load("qasm/suma_5mas3_cuccaro.qasm")   # el MISMO archivo que pegamos en el Composer
+print("Compuertas del circuito original:", dict(circuito.count_ops()))
+circuito.draw("mpl", fold=-1)
+""")
+
+md(r"""
+### Paso 1: traducir el circuito al chip
+
+El chip no sabe hacer Toffoli ni CNOT directamente, y sus qubits no están todos conectados. Por eso, antes de
+correr, Qiskit "transpila" el circuito. Lo hacemos aquí con `FakeKingston`, una copia que trae Qiskit de cómo es
+ibm_kingston: sus compuertas, sus conexiones y los errores que IBM midió en él.
+""")
+code(r"""
+import warnings; warnings.filterwarnings("ignore")
+from qiskit_ibm_runtime.fake_provider import FakeKingston
+
+kingston = FakeKingston()
+print("Compuertas nativas de ibm_kingston:", [g for g in kingston.operation_names if g in ("cz", "rz", "sx", "x")])
+
+traducido = transpile(circuito, kingston, optimization_level=3, seed_transpiler=7)
+def compuertas(c): return {k: v for k, v in c.count_ops().items() if k not in ("barrier", "measure")}
+print("\nOriginal :", compuertas(circuito), "| profundidad", circuito.depth())
+print("Traducido:", compuertas(traducido), "| profundidad", traducido.depth())
+print("\nQubits físicos del chip que usó (de 156):", traducido.layout.final_index_layout())
+""")
+md(r"""
+Las 13 CNOT y 6 Toffoli se convierten en unas **70 compuertas CZ** y más de 200 compuertas de un qubit. El circuito
+queda **más de 10 veces más profundo**. Cada una de esas compuertas es una oportunidad más de error. (En el trabajo
+real, IBM lo tradujo un poco distinto y le salieron 86 compuertas de dos qubits.)
+""")
+
+md("### Paso 2: comparar los tres resultados")
+code(r"""
+import json
+
+# 1) Simulación ideal (lo que corre en PowerShell)
+ideal = AerSimulator(seed_simulator=7)
+c_ideal = ideal.run(transpile(circuito, ideal), shots=1024).result().get_counts()
+
+# 2) Simulación con el ruido medido de ibm_kingston
+ruidoso = AerSimulator.from_backend(kingston, seed_simulator=7)
+c_ruido = ruidoso.run(traducido, shots=1024).result().get_counts()
+
+# 3) El computador cuántico REAL (resultado descargado de IBM)
+real = json.load(open("resultados/ibm_kingston_5mas3_cuccaro.json"))
+c_real = real["cuentas"]
+
+valores = [format(v, "04b") for v in range(16)]
+series = [("Simulador ideal", c_ideal, "#257de0"),
+          ("Simulador con ruido de ibm_kingston", c_ruido, "#f47230"),
+          ("ibm_kingston REAL", c_real, "#00b894")]
+
+fig, axs = plt.subplots(1, 3, figsize=(15, 3.8), sharey=True)
+for ax, (titulo, cuentas, color) in zip(axs, series):
+    ys = [cuentas.get(v, 0) / 1024 for v in valores]
+    ax.bar(range(16), ys, color=[color if v == "1000" else "#c8c8c8" for v in valores])
+    ax.set_title(f"{titulo}\nP(8) = {cuentas.get('1000', 0) / 1024:.1%}", fontsize=10)
+    ax.set_xticks(range(16), [str(i) for i in range(16)], fontsize=8)
+    ax.set_xlabel("resultado medido")
+axs[0].set_ylabel("fracción de las 1024 mediciones")
+plt.tight_layout(); plt.show()
+
+print(f"{'':38}{'P(resultado = 8)':>18}")
+for titulo, cuentas, _ in series:
+    print(f"{titulo:38}{cuentas.get('1000', 0) / 1024:>17.1%}")
+""")
+md(r"""
+**Qué vemos:**
+
+* **Ideal:** siempre sale 8. Es matemática perfecta.
+* **Con el ruido de ibm_kingston:** el 8 sigue ganando, pero aparecen otros valores con poca probabilidad.
+* **Real:** el 8 sale el **74,8 %** de las veces. Es menos que en la simulación con ruido.
+
+¿Por qué el real sale peor que la simulación con ruido? Algunas razones:
+
+1. Los errores guardados en `FakeKingston` se midieron en una fecha anterior, y los errores de un chip real
+   cambian de un día a otro.
+2. IBM tradujo el circuito de otra forma (86 compuertas de dos qubits en vez de unas 70).
+3. El modelo de ruido es una aproximación: no incluye todo lo que pasa en el chip, como la interferencia entre
+   qubits vecinos.
+
+Aun así, en los tres casos **la respuesta más frecuente es la correcta**. Con números más grandes eso ya no se
+cumpliría: por eso los computadores cuánticos de hoy todavía necesitan **corrección de errores** para hacer
+cálculos largos.
+""")
+
+md(r"""
+## 11. Conclusiones
 
 * Sí se puede sumar y multiplicar con circuitos cuánticos, y nos dio bien en todos los casos que probamos.
 * La parte que más tiene que ver con la materia es la QFT: sumar se convierte en multiplicar por raíces de la
   unidad, o sea, en rotar en el círculo unitario.
 * No es más rápido que una calculadora normal. Estos circuitos sirven como piezas para algoritmos más grandes,
   como el de Shor.
-* En computadores reales el ruido es un problema serio, sobre todo para la multiplicación.
+* Lo corrimos en un computador cuántico real (ibm_kingston) y 5 + 3 dio 8 el 74,8 % de las veces. El ruido es un
+  problema serio, sobre todo para la multiplicación.
 
 **Referencias:** Draper (2000), arXiv:quant-ph/0008033 · Cuccaro et al. (2004), arXiv:quant-ph/0410184 ·
 Ruiz-Pérez y García-Escartín (2017), arXiv:1411.5949 · Nielsen y Chuang, cap. 5 · documentación de Qiskit.
