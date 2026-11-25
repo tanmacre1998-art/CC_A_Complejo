@@ -68,6 +68,13 @@ python scripts/comparar_hardware.py --real   # también en un computador real (n
 
 ![Ideal vs ruido real](figuras/hardware.png)
 
+**¡Lo corrimos en un computador cuántico de verdad!** Pegamos `qasm/suma_5mas3_cuccaro.qasm` en el IBM Quantum Composer
+y lo mandamos a **ibm_kingston** (156 qubits). De 1024 mediciones, el resultado correcto (`1000` = 8) salió el
+**74,8 %** de las veces; el resto es ruido del computador. La simulación con el ruido de ibm_fez, que es del mismo tipo
+(Heron r2), daba 81 %, así que quedó bastante cerca.
+
+![5 + 3 en ibm_kingston](figuras/ibm_kingston_5mas3.png)
+
 ## Dificultades que tuvimos
 
 Honestamente esto nos costó bastante más de lo que pensábamos:
