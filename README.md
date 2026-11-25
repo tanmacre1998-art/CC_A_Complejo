@@ -54,6 +54,19 @@ pytest -q                 # pruebas
 * `scripts/analisis.py` → hace las gráficas (se demora como 5 minutos por la parte de ruido)
 * `figuras/` y `resultados/` → lo que sale del análisis
 
+## ¿Y en un computador cuántico de verdad?
+
+Con `scripts/comparar_hardware.py` comparamos la simulación ideal con el ruido calibrado de computadores reales de
+IBM (Qiskit trae guardados los errores medidos en esos equipos). Con `--real` el mismo script manda los circuitos a
+un computador cuántico real de IBM, usando una cuenta gratuita de IBM Quantum.
+
+```bash
+python scripts/comparar_hardware.py          # ideal vs. ruido de ibm_fez e ibm_brisbane
+python scripts/comparar_hardware.py --real   # también en un computador real (necesita cuenta)
+```
+
+![Ideal vs ruido real](figuras/hardware.png)
+
 ## Dificultades que tuvimos
 
 Honestamente esto nos costó bastante más de lo que pensábamos:

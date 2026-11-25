@@ -1,0 +1,134 @@
+{
+  "Ideal": [
+    {
+      "operacion": "3 + 2 (QFT)",
+      "esperado": 5,
+      "p_correcto": 1.0
+    },
+    {
+      "operacion": "3 + 2 (Cuccaro)",
+      "esperado": 5,
+      "p_correcto": 1.0
+    },
+    {
+      "operacion": "5 + 3 (QFT)",
+      "esperado": 8,
+      "p_correcto": 1.0
+    },
+    {
+      "operacion": "5 + 3 (Cuccaro)",
+      "esperado": 8,
+      "p_correcto": 1.0
+    },
+    {
+      "operacion": "2 × 3",
+      "esperado": 6,
+      "p_correcto": 1.0
+    },
+    {
+      "operacion": "3 × 3",
+      "esperado": 9,
+      "p_correcto": 1.0
+    }
+  ],
+  "Ruido de ibm_fez (Heron)": [
+    {
+      "operacion": "3 + 2 (QFT)",
+      "esperado": 5,
+      "p_correcto": 0.88775,
+      "mas_frecuente": 5,
+      "compuertas_2q": 36,
+      "profundidad": 97
+    },
+    {
+      "operacion": "3 + 2 (Cuccaro)",
+      "esperado": 5,
+      "p_correcto": 0.88675,
+      "mas_frecuente": 5,
+      "compuertas_2q": 45,
+      "profundidad": 142
+    },
+    {
+      "operacion": "5 + 3 (QFT)",
+      "esperado": 8,
+      "p_correcto": 0.782,
+      "mas_frecuente": 8,
+      "compuertas_2q": 78,
+      "profundidad": 215
+    },
+    {
+      "operacion": "5 + 3 (Cuccaro)",
+      "esperado": 8,
+      "p_correcto": 0.81275,
+      "mas_frecuente": 8,
+      "compuertas_2q": 72,
+      "profundidad": 219
+    },
+    {
+      "operacion": "2 × 3",
+      "esperado": 6,
+      "p_correcto": 0.573,
+      "mas_frecuente": 6,
+      "compuertas_2q": 192,
+      "profundidad": 552
+    },
+    {
+      "operacion": "3 × 3",
+      "esperado": 9,
+      "p_correcto": 0.551,
+      "mas_frecuente": 9,
+      "compuertas_2q": 192,
+      "profundidad": 552
+    }
+  ],
+  "Ruido de ibm_brisbane (Eagle)": [
+    {
+      "operacion": "3 + 2 (QFT)",
+      "esperado": 5,
+      "p_correcto": 0.77975,
+      "mas_frecuente": 5,
+      "compuertas_2q": 36,
+      "profundidad": 161
+    },
+    {
+      "operacion": "3 + 2 (Cuccaro)",
+      "esperado": 5,
+      "p_correcto": 0.73575,
+      "mas_frecuente": 5,
+      "compuertas_2q": 46,
+      "profundidad": 212
+    },
+    {
+      "operacion": "5 + 3 (QFT)",
+      "esperado": 8,
+      "p_correcto": 0.61325,
+      "mas_frecuente": 8,
+      "compuertas_2q": 74,
+      "profundidad": 304
+    },
+    {
+      "operacion": "5 + 3 (Cuccaro)",
+      "esperado": 8,
+      "p_correcto": 0.62875,
+      "mas_frecuente": 8,
+      "compuertas_2q": 70,
+      "profundidad": 276
+    },
+    {
+      "operacion": "2 × 3",
+      "esperado": 6,
+      "p_correcto": 0.35425,
+      "mas_frecuente": 6,
+      "compuertas_2q": 194,
+      "profundidad": 752
+    },
+    {
+      "operacion": "3 × 3",
+      "esperado": 9,
+      "p_correcto": 0.34675,
+      "mas_frecuente": 9,
+      "compuertas_2q": 194,
+      "profundidad": 752
+    }
+  ]
+}
