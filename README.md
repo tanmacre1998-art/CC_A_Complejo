@@ -53,6 +53,7 @@ pytest -q                 # pruebas
 * `tests/` → las pruebas
 * `scripts/analisis.py` → hace las gráficas (se demora como 5 minutos por la parte de ruido)
 * `figuras/` y `resultados/` → lo que sale del análisis
+* `qasm/` → algunos circuitos en OpenQASM para abrirlos en el IBM Quantum Composer (copiar y pegar en el editor de código)
 
 ## ¿Y en un computador cuántico de verdad?
 
