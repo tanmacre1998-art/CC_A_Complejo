@@ -102,8 +102,6 @@ Honestamente esto nos costó bastante más de lo que pensábamos:
 * **Entender la QFT como tal** fue lo más difícil. Nos ayudó mucho verla como una transformada de Fourier
   discreta normal, con raíces de la unidad, que es lo que vimos en clase.
 
-Usamos herramientas de IA como apoyo para entender conceptos y encontrar errores en el código.
-
 ## Referencias
 
 * T. G. Draper, *Addition on a Quantum Computer* (2000), arXiv:quant-ph/0008033.
