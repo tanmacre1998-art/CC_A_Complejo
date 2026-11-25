@@ -22,4 +22,6 @@ cx q[0],q[1];
 h q[0];
 rz(pi/4) q[1];
 rz(pi/8) q[2];
-swap q[0],q[2];
+cx q[0],q[2];
+cx q[2],q[0];
+cx q[0],q[2];
